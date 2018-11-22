@@ -8,7 +8,6 @@
     try{
         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
         $DBConnection = new PDO("mysql:host=" . $host . ";dbname=" . $bdd, $user, $password, $pdo_options);
-        echo "bdd run";
     }
     catch (Exception $e){
         die("Error : " . $e->getMessage());

@@ -7,10 +7,13 @@ function getAllEtudiant() {
     
     $data = $DBConnection->query("SELECT * FROM etudiant");
     $etudiants = [];
-    
-    while ($req = $data->fetch()) {
 
+    while ($req = $data->fetch()) {
+        $etudiant = new Etudiant($req["id"], $req["nom"], $req["prenom"]);
+        array_push($etudiants, $etudiant);
     }
+
+    return $etudiants;
 }
 
 ?>
