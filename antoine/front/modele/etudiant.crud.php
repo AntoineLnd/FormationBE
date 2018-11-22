@@ -11,7 +11,7 @@ function getAllEtudiant() {
     // Envoie d'une requête de type GET
     $response = json_decode(file_get_contents($path), true); 
     $etudiants = [];
-
+    
     //  Transformation des objets de type stdclass en objet Etudiant
     foreach($response as $e) {
         $etudiants[] = new Etudiant($e["id"], $e["nom"], $e["prenom"]);
