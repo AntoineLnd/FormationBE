@@ -1,15 +1,10 @@
 <?php
 
-$host = "localhost";
-$util = "root";
-$password = "";
-$bdd = "baseetudiant";
+class Api {
 
-try {
-    $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-    $bdd = new PDO('mysql:host='.$host.';dbname='.$bdd, $util, $password, $pdo_options);
-    echo "bdd run";
-}
-catch (Exception $e) {
-    die('Erreur : '.$e->getMessage());
+    private static $path = "http://localhost:3200";
+
+    static function gePath() {
+        return self::$path;
+    }
 }

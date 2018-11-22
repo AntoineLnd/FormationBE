@@ -8,6 +8,7 @@
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="?page=controle&action=listEtudiant">Les Etudiants</a></li>
+            <li><a href="?page=controle&action=etudiant">etudiant</a></li>
         </ul>
     </nav>
 </header>
