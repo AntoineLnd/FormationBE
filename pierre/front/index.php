@@ -9,26 +9,26 @@
     </head>
     <body>
     <?php
-        include 'vue/include/header.inc.php';
+        include 'Vue/Include/header.inc.php';
 
         if(!isset($_GET['page']))
         {
-            include 'vue/include/index.inc.php';
+            include 'Vue/Include/index.inc.php';
         }
         else
         {
             $page = $_GET['page'];
 
-            if(file_exists("controler/$page.php"))
+            if(file_exists("Controleur/$page.php"))
             {
-                include "controler/$page.php";
+                include "Controleur/$page.php";
             }
             else
             {
-                include "vue/include/error.inc.php";
+                include "Vue/Include/error.inc.php";
             }
         }
-        include "vue/include/footer.inc.php";
+        include "Vue/Include/footer.inc.php";
      ?>
 
     </body>
