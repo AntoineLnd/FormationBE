@@ -1,5 +1,4 @@
 <?php
-    /*
     //$host = "192.168.0.44:8080";
     $host = "localhost";
     $user = "root";
@@ -12,14 +11,6 @@
     }
     catch (Exception $e){
         die("Error : " . $e->getMessage());
-    }*/
-
-    class Api {
-        private static $path = "http://localhost:3200";
-
-        static function getPath() {
-            return self::$path;
-        }
     }
 
 ?>
