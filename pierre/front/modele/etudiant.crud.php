@@ -3,18 +3,14 @@
 require_once('config.php');
 require_once('etudiant.class.php');
 
-
 function getAllEtudiant() {
-    $path = Config::getPathAPI();
-    
-    $response = json_decode(file_get_contents($path."/etudiants"), true);
-    $etudiants = [];
-    
-    foreach($response as $e) {
-        $etudiants[] = new Etudiant($e["id"], $e["nom"], $e["prenom"]);
-    }
-
-    return $etudiants;
+	try {
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$host.';dbname='.$bdd,$util,$password,$pdo_options);
+	}
+	catch(Exception $e) {
+		die('Erreur :'.$e->getMessage());
+	}
 }
 
 ?>
