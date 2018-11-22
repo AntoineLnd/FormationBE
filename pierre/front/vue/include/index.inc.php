@@ -1,5 +1,3 @@
 <div class="container">
-	<h1>
-		SALUT LES GENS ! C'EST MOI QUI PARLE A TRAVERS LE DISQUE !
-	</h1>
+    <h1>Bienvenue sur le site de gestion des Etudiants</h1>
 </div>
