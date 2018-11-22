@@ -1,12 +1,15 @@
 <?php
 
-class Config {
-    private static $path = "http://localhost:8081/";
+$host = "localhost";
+$util = "root";
+$password = "";
+$bdd = "baseetudiant";
 
-    static function getPathAPI() {
-        return self::$path;
-    }
-
+try {
+    $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+    $bdd = new PDO('mysql:host='.$host.';dbname='.$bdd, $util, $password, $pdo_options);
+    echo "bdd run";
 }
-
-?>
+catch (Exception $e) {
+    die('Erreur : '.$e->getMessage());
+}
