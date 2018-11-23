@@ -1,13 +1,23 @@
 <?php
 
-class Etudiant {
+class Etudiant implements JsonSerializable {
 
-    public $id;
-    public $nom;
-    public $prenom;
+    private $id;
+    private $nom;
+    private $prenom;
 
     function __construct() {
 
+    }
+
+    /*
+    *   Permet le json_encode avec des attributs privée
+    */
+    public function jsonSerialize() {
+        return array(
+            "id" => $this->id, 
+            "nom" => $this->nom, 
+            "prenom" => $this->prenom);
     }
 }
 

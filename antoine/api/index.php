@@ -18,7 +18,7 @@ if(file_get_contents("php://input") != "") {
 }
 
 if (!file_exists('./ressources/'.$root.'/router.php')) { 
-    echo 'Ressource not found !'; 
+    echo 'Ressource not found !';
 } 
 else {
   require('./ressources/'.$root.'/router.php');
