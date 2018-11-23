@@ -1,5 +1,4 @@
 <?php
-
 include('config.php');
 require_once('etudiant.class.php');
 
@@ -18,22 +17,7 @@ function getAllEtudiant() {
         }
         return $etudiants;
     }
-
 }
-/*
-function selectEtudiant($id) {
-    include('config.php');
-
-    $reponse = $bdd->prepare("SELECT * FROM etudiant where id = :id");
-    $reponse->bindParam(':id', $id, PDO::PARAM_INT);
-    $reponse->execute();
-
-    $data = $reponse->fetch(PDO::FETCH_ASSOC);
-
-    $etudiant = new Etudiant($data["id"], $data["nom"], $data["prenom"]);
-
-    echo $etudiant;
-}*/
 
 function createEtudiant($nom, $prenom) {
     $path = Api::gePath()."/etudiants/create";
@@ -77,6 +61,54 @@ function deleteEtudiant($id) {
     
     $success = file_get_contents($path, false, $context);
     
+    return $success;
+}
+
+//////////////////////PROFS/////////////////
+include_once('prof.class.php');
+
+function getAllProfs(){
+    $path=Api::gePath()."/profs";
+    $response = json_decode(file_get_contents($path), true);
+    $profs=[];
+
+    foreach ($response as $p) {
+        $profs[]=new Prof($p["id"],$p["prenom"],$p["nom"],$p["email"]);
+    }
+    return $profs;
+}
+
+function deleteProf($id) {
+    $path=Api::gePath()."/profs/delete";
+    $postdata=array("id" => $id);
+    $opts=array('http' =>
+        array(
+            'method' => 'POST',
+            'header' => 'Content-Type: application/json',
+            'content' => json_encode($postdata)
+        )
+    );
+    $context=stream_context_create($opts);
+    $success=file_get_contents($path,false,$context);
+    return $success;
+}
+
+function createProf($nom, $prenom, $email) {
+    $path=Api::gePath()."/profs/create";
+    $postdata=array (
+        "nom" => $nom,
+        "prenom" => $prenom,
+        "email" => $email
+    );
+    $opts=array('http' =>
+        array(
+            'method'  => 'POST',
+            'header'  => 'Content-Type: application/json',
+            'content' => json_encode($postdata)
+        )
+    );
+    $context=stream_context_create($opts);
+    $success=file_get_contents($path, false, $context);
     return $success;
 }
 
