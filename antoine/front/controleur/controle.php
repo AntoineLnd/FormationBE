@@ -7,25 +7,37 @@ if(isset($_GET['action']))
             require_once('modele/etudiant.crud.php');
             $etudiants = getAllEtudiant();
             include 'vue/etudiants.php';
-
-        break;
-
-        case 'etudiant':
-
-        require_once("vue/selectEtudiant.php");
-
-        break;
-
-        case 'selectEtudiant':
-
-        if(isset($_POST["id"])) 
-        {   
-            $id = $_POST["id"];
+            
+            break;
+            
+        case 'createEtudiant':
             require_once('modele/etudiant.crud.php');
-            $etudiant = selectEtudiant($id);
-        }
+            $success = createEtudiant($_POST["nom"], $_POST["prenom"]);
+
+            if($success == true) {
+                $etudiants = getAllEtudiant();
+                include 'vue/etudiants.php';
+            }
+            else {
+                header('Location:index.php');
+            }
 
         break;
+
+        case 'deleteEtudiant':
+            require_once('modele/etudiant.crud.php');
+            
+            $success = deleteEtudiant($_GET["id"]);
+            
+            if($success == true) {
+                $etudiants = getAllEtudiant();
+                include 'vue/etudiants.php';
+            }
+            else {
+                header('Location:index.php');
+            }
+
+            break;
 
         default:
 
@@ -39,4 +51,4 @@ else
     header('Location:index.php');
 }
 
- ?>
+?>

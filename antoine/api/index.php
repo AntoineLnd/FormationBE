@@ -3,20 +3,25 @@
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 
-include('connect.php');
-include('etudiant.class.php');
-
-//var_dump($_SERVER['PATH_INFO']);
-
-$reponse = $bdd->query("SELECT * FROM etudiant");
-$reponse->execute();
-
-$etudiants = [];
-
-while($e = $reponse->fetchObject(Etudiant::class)) {
-    $etudiants[] = $e;
+if (isset($_SERVER['PATH_INFO'])) {
+    $root = explode('/', $_SERVER['PATH_INFO'])[1]; // [1] car explode retourne ['', 'etudiant', ...]
+    $url = $_SERVER['PATH_INFO'];
+} else {
+    $root = 'default';
+    $url = '/';
 }
 
-echo json_encode($etudiants);
+$data = [];
+if(file_get_contents("php://input") != "") {
+    $jsonData = file_get_contents("php://input");
+    $data = json_decode($jsonData, true);
+}
+
+if (!file_exists('./ressources/'.$root.'/router.php')) { 
+    echo 'Ressource not found !'; 
+} 
+else {
+  require('./ressources/'.$root.'/router.php');
+}
 
 ?>
