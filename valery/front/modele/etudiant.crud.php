@@ -19,7 +19,7 @@ require_once('etudiant.class.php');
 //getAllEtudiant pour API
 function getAllEtudiant()  {   
     
-    $path = Api::getPath();
+    $path = Api::getPath()."/etudiants";
     //Envoie une requte de type GET
     $data = json_decode(file_get_contents($path), true);
     $etudiants = [];

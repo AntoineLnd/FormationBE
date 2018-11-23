@@ -1,19 +1,27 @@
 <?php
-  
-  header('Content-Type: application/json');
-  header('Access-Control-Allow-Origin: *');
 
-  include('connect.php');
-  include('etudiant.class.php');
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 
-  $data = $DBConnection->query("SELECT * FROM etudiant");
-  $etudiants = [];
-  
-  while ($req = $data->fetch()) {
-      $etudiants[] = new Etudiant($req["id"], $req["nom"], $req["prenom"]);
-  }
+if (isset($_SERVER['PATH_INFO'])) {
+    $root = explode('/', $_SERVER['PATH_INFO'])[1]; // [1] car explode retourne ['', 'etudiant', ...]
+    $url = $_SERVER['PATH_INFO'];
+} else {
+    $root = 'default';
+    $url = '/';
+}
 
-  echo json_encode($etudiants);
+$data = [];
+if(file_get_contents("php://input") != "") {
+    $jsonData = file_get_contents("php://input");
+    $dataReq = json_decode($jsonData, true);
+}
 
-  //phpinfo();
+if (!file_exists('./ressources/'.$root.'/router.php')) { 
+    echo 'Ressource not found !'; 
+} 
+else {
+  require('./ressources/'.$root.'/router.php');
+}
+
 ?>
