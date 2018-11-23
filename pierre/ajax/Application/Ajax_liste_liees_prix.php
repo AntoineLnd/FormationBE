@@ -16,19 +16,19 @@ try
 		?>
 		<form name='monform'>
 		<div>
-				<label>Categorie des produits</label>
-				<select id='choixcateg'>
-					<option value=0>choisir la categorie</option>
-					<?php
-						$maListeCategorie=new ListeCategorie();
-						$maListeCategorie->chargeLesCategories();
+			<label>Categorie des produits</label>
+			<select id='choixcateg'>
+				<option value=0>choisir la categorie</option>
+				<?php
+					$maListeCategorie=new ListeCategorie();
+					$maListeCategorie->chargeLesCategories();
 
-						 foreach( $maListeCategorie->lesCategories as $uneCategorie)
-						{
-							echo "<option value=$uneCategorie->codeCateg>$uneCategorie->nomCateg</option>";
-						}
-					?>
-				</select>
+						foreach($maListeCategorie->lesCategories as $uneCategorie)
+					{
+						echo "<option value=$uneCategorie->codeCateg>$uneCategorie->nomCateg</option>";
+					}
+				?>
+			</select>
 		</div>
 
 		<div id="lesProduits" >
