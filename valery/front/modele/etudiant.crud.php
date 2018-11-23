@@ -23,7 +23,7 @@ function getAllEtudiant()  {
     //Envoie une requte de type GET
     $data = json_decode(file_get_contents($path), true);
     $etudiants = [];
-    
+
     foreach($data as $req) {
         $etudiants[] = new Etudiant($req["id"], $req["nom"], $req["prenom"]);
     }
