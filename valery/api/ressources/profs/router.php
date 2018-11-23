@@ -7,10 +7,10 @@ switch($url) {
         getAll();
         break;
     case '/'.$root.'/create':
-        createProf($data);
+        createProf($dataReq);
         break;
     case '/'.$root.'/delete':
-        deleteProf($data);
+        deleteProf($dataReq);
         break;
     default:
         echo "Error Etudiant : no match root !";
@@ -38,11 +38,11 @@ function getAll() {
     }
 }
 
-function createEtudiant($dataReq) {
+function createProf($dataReq) {
     include('connect.php');
     
     try {
-        $data = $DBConnection->prepare("INSERT INTO professeur(nom, prenom, email) VALUES (:nom, :prenom, :email)");
+        $data = $DBConnection->prepare("INSERT INTO professeur(nom, prenom, email, id_cours) VALUES (:nom, :prenom, :email, 1)");
         $data->bindParam(':nom', $dataReq["nom"], PDO::PARAM_STR);
         $data->bindParam(':prenom', $dataReq["prenom"], PDO::PARAM_STR);
         $data->bindParam(':email', $dataReq["email"], PDO::PARAM_STR);
@@ -59,9 +59,9 @@ function deleteProf($dataReq) {
     include('connect.php');
     
     try {
-        $reponse = $bdd->prepare("DELETE FROM professeur WHERE id = :id ");
-        $reponse->bindParam(':id', $dataReq["id"], PDO::PARAM_INT);
-        $reponse->execute();
+        $data = $DBConnection->prepare("DELETE FROM professeur WHERE id = :id");
+        $data->bindParam(':id', $dataReq["id"], PDO::PARAM_INT);
+        $data->execute();
 
         echo true;
     }

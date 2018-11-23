@@ -1,6 +1,6 @@
 <?php
 
-class Prof {
+class Prof implements JsonSerializable {
 
     private $id;
     private $nom;
@@ -11,7 +11,7 @@ class Prof {
         $this->id = $id;
         $this->nom = $n;
         $this->prenom = $p;
-        $this->email = $p;
+        $this->email = $e;
     }
 
     function __get($attr) {
@@ -53,6 +53,11 @@ class Prof {
 
     function __toString() {
         return $this->id." - ".$this->prenom.' - '.$this->nom.' - '.$this->email;
+    }
+
+    public function jsonSerialize()
+    {
+        return array("id" => $this->id, "nom" => $this->nom, "prenom" => $this->prenom, "email" => $this->email);
     }
 }
 

@@ -12,6 +12,7 @@ if(isset($_GET['action']))
             
         case 'createProf':
             require_once('modele/prof.crud.php');
+            
             $success = createProf($_POST["nom"], $_POST["prenom"], $_POST["email"]);
 
             if($success == true) {
@@ -30,7 +31,7 @@ if(isset($_GET['action']))
             $success = deleteProf($_GET["id"]);
             
             if($success == true) {
-                $etudiants = getAllProf();
+                $profs = getAllProf();
                 include 'vue/profs.php';
             }
             else {

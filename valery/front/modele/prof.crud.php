@@ -9,7 +9,7 @@ function getAllProf(){
     $data = json_decode(file_get_contents($path), true);
     $profs = [];
     
-    foreach($data as $req) {
+    foreach($data["data"] as $req) {
         $profs[] = new Prof($req["nom"], $req["prenom"], $req["email"], $req["id"]);
     }
 
@@ -32,7 +32,7 @@ function createProf($nom, $prenom, $email){
     $context  = stream_context_create($opts);
     
     $success = file_get_contents($path, false, $context);
-    
+
     return $success;
 }
 
