@@ -8,7 +8,7 @@
 
   $data = $DBConnection->query("SELECT * FROM etudiant");
   $etudiants = [];
-
+  
   while ($req = $data->fetch()) {
       $etudiants[] = new Etudiant($req["id"], $req["nom"], $req["prenom"]);
   }
