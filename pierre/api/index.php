@@ -11,19 +11,10 @@ if (isset($_SERVER['PATH_INFO'])) {
     $url = '/';
 }
 
-/*$d = dir("C:\wamp64\www\git\FormationBE\\valery\api\ressources\profs");
-echo "Pointeur : " . $d->handle . "\n";
-echo "Chemin : " . $d->path . "\n";
-while (false !== ($entry = $d->read())) {
-   echo $entry."\n";
-}
-$d->close();*/
-
-
-$dataReq = [];
+$data = [];
 if(file_get_contents("php://input") != "") {
     $jsonData = file_get_contents("php://input");
-    $dataReq = json_decode($jsonData, true);
+    $data = json_decode($jsonData, true);
 }
 
 if (!file_exists('./ressources/'.$root.'/router.php')) { 
