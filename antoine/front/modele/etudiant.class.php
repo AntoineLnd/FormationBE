@@ -1,17 +1,25 @@
 <?php
 
 class Etudiant {
-
+    /*
+    *   Attributs
+    */
     private $id;
     private $nom;
     private $prenom;
 
+    /*
+    *   Contructeur de notre objet, on peut passer des valeur par défault dans les paramètres
+    */
     function __construct($id, $n, $p) {
         $this->id = $id;
         $this->nom = $n;
         $this->prenom = $p;
     }
 
+    /*
+    *   Permet d'accéder en lecture aux attributs : $monObjet->nom 
+    */
     function __get($attr) {
         switch($attr) {
             case "id":
@@ -29,6 +37,9 @@ class Etudiant {
         }
     }
 
+    /*
+    *   Permet d'accéder en écriture aux attributs : $monObjet->nom = "monNom" 
+    */
     function __set($attr, $value) {
         switch($attr) {
             case "prenom":
@@ -43,14 +54,17 @@ class Etudiant {
         }
     }
 
+    /*
+    *   Redéfinir la méthode toString() de notre objet; 
+    *   ici :
+    *       -   $monEtudiant = new Etudiant(1, "Antoine", "Lienard");
+    *       -   echo $monEtudiant //affichera : 1 - antoine - lienard
+    *
+    *   Php ira chercher notre définition de toString() pour afficher notre objet
+    */
     function __toString() {
         return $this->id." - ".$this->prenom.' - '.$this->nom;
     }
 }
-
-/*  TEST CLASS ETUDIANT
-$etudiant = new Etudiant(1,"Bisous", "Nours");
-
-echo $etudiant;*/
 
 ?>

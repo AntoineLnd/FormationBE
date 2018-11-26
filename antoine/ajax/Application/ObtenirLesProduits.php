@@ -23,17 +23,9 @@
 		{
 			$reponse[0] = utf8_encode('Aucun Produit');
 		}
-		//var_dump($reponse);
+		
 		echo json_encode($reponse);
 		}
-
-		/* while(list($index, $valeur) = each($reponse)){
-				echo "$index = $valeur <br>";
-				} */
-
-
-		//var_dump($reponse);
-
 	}
 	catch (Exception $e)
 {

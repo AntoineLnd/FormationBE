@@ -17,32 +17,23 @@ function getAllEtudiant() {
             $etudiants[] = new Etudiant($e["id"], $e["nom"], $e["prenom"]);
         }
         return $etudiants;
+    }else {
+        echo "erreur";
+        var_dump($response['message']);
+        die;
     }
 
 }
-/*
-function selectEtudiant($id) {
-    include('config.php');
-
-    $reponse = $bdd->prepare("SELECT * FROM etudiant where id = :id");
-    $reponse->bindParam(':id', $id, PDO::PARAM_INT);
-    $reponse->execute();
-
-    $data = $reponse->fetch(PDO::FETCH_ASSOC);
-
-    $etudiant = new Etudiant($data["id"], $data["nom"], $data["prenom"]);
-
-    echo $etudiant;
-}*/
 
 function createEtudiant($nom, $prenom) {
     $path = Api::gePath()."/etudiants/create";
-    
+    //  Creation de notre tableau de donnée a envoyer a l'API
+    // On peut aussi creer un objet, et l'encoder en JSON (La class doit redefinir la methode jsonSerialize() voir API)
     $postdata = array (
         "nom" => $nom,
         "prenom" => $prenom
     );
-    
+    // Création de notre requete HTTP
     $opts = array('http' =>
         array(
             'method'  => 'POST',
@@ -50,9 +41,13 @@ function createEtudiant($nom, $prenom) {
             'content' => json_encode($postdata)
         )
     );
-    
+    //  Création d'un context
     $context  = stream_context_create($opts);
     
+    //  Envoie de la requête a l'api, stock le retour dans $success
+    //  Attention :
+    //      - au message JSON retourner : Si JSON retour = [ "success" => "true", "data" => [....]]
+    //      - alors Les données se trouvent dans $success[1]
     $success = file_get_contents($path, false, $context);
     
     return $success;

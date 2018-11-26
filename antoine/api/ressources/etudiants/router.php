@@ -1,15 +1,19 @@
 <?php 
 
+// Include de notre classe Etudiant
 include('etudiant.class.php');
 
+/*
+*   Switch sur le type de route demandé
+*/
 switch($url) {
-    case '/'.$root:
+    case '/'.$root:             // /etudiant
         getAll();
         break;
-    case '/'.$root.'/create':
+    case '/'.$root.'/create':   // /etudiant/create
         createEtudiant($data);
         break;
-    case '/'.$root.'/delete':
+    case '/'.$root.'/delete':   // /etudiant/delete
         deleteEtudiant($data);
         break;
     default:
@@ -18,27 +22,31 @@ switch($url) {
 }
 
 function getAll() {
-    include('connect.php');
+    include('connect.php'); // Include de notre connexion a la DBO
     
     try {
+        /*
+        *   Utilisation de l'objet PDO $bdd pour la requête
+        */
         $reponse = $bdd->query("SELECT * FROM etudiant");
         $reponse->execute();
         
         $etudiants = [];
-    
+        
+        //  Stocke chacune des lignes de la reponse dans notre tableau etudiant [],
+        //  Ici utilisation de fetchObjec(Etudiant::class)
         while ($e = $reponse->fetchObject(Etudiant::class)) {
-            //$etudiant = new Etudiant($e['id'], $e['nom'], $e['prenom']);
             $etudiants[] = $e;
         }
         
+        //  Création  de notre message de retour 
         $message = ["success" => true, "data" => $etudiants];
 
-        echo json_encode($message);
-    
     } catch (Exception $e) {
-    
-        die('Erreur :'.$e->getMessage());
+        $message = ["success" => false, "data" => null, "message" => $e->getMessage()];
     }
+    //  Renvoi de notre message a l'applicatif
+    echo json_encode($message);
 }
 
 function createEtudiant($data) {

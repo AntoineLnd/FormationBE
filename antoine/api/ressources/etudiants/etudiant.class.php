@@ -1,11 +1,17 @@
 <?php
 
 class Etudiant implements JsonSerializable {
-
+    
+    /*
+    *   Attributs
+    */
     private $id;
     private $nom;
     private $prenom;
 
+    /*
+    *   Constructeur vide pour permettre le fetchObject() dans le router
+    */
     function __construct() {
 
     }

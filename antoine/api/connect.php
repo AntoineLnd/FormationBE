@@ -1,5 +1,9 @@
 <?php
 
+/*
+*   Connexion a la DB - PDO
+*/
+
 $host = "localhost";
 $util = "root";
 $password = "";
